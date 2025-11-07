@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --beige: #f5f1eb;
+  --light-grey: #f0f0f0;
+  --pastel-blue: #e8f4f8;
+  --pastel-pink: #fce8f0;
+  --accent: #8b7355;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Luxury brand aesthetic */
+.gradient-beige {
+  background: linear-gradient(135deg, #f5f1eb 0%, #fafafa 100%);
+}
+
+.gradient-pastel {
+  background: linear-gradient(135deg, #e8f4f8 0%, #fce8f0 100%);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, transform, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}

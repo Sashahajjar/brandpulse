@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Brand model - stores brand information
+model Brand {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  logo        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Social media platforms
+  platforms   Platform[]
+  
+  // Analytics data
+  insights    Insight[]
+  
+  // Historical snapshots
+  snapshots   SocialSnapshot[]
+  
+  // Sync jobs
+  syncJobs    SyncJob[]
+  
+  @@map("brands")
+}
+
+// Platform model - Instagram, TikTok, X, etc.
+model Platform {
+  id              String   @id @default(uuid())
+  brandId         String
+  platformType    String   // "instagram", "tiktok", "x"
+  username        String
+  followers       Int      @default(0)
+  engagementRate  Float    @default(0)
+  postingFrequency Int     @default(0)
+  lastFetchedAt   DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  brand           Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  
+  @@unique([brandId, platformType])
+  @@index([brandId])
+  @@map("platforms")
+}
+
+// Insight model - stores analytics and sentiment data
+model Insight {
+  id              String   @id @default(uuid())
+  brandId         String
+  metricType      String   // "engagement", "sentiment", "growth", etc.
+  value           Float
+  period          String   // "daily", "weekly", "monthly"
+  date            DateTime @default(now())
+  metadata        Json?    // Additional data (sentiment scores, etc.)
+  createdAt       DateTime @default(now())
+  
+  brand           Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  
+  @@index([brandId])
+  @@index([brandId, metricType, date])
+  @@map("insights")
+}
+
+// SocialSnapshot model - stores historical snapshots of platform metrics
+model SocialSnapshot {
+  id          String   @id @default(uuid())
+  brandId     String
+  platform    String   // "instagram", "tiktok", "x"
+  metric      String   // "followers", "engagement_rate", "posting_frequency"
+  value       Float
+  capturedAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
+  
+  brand       Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  
+  @@unique([brandId, platform, metric, capturedAt])
+  @@index([brandId])
+  @@index([brandId, platform, capturedAt])
+  @@map("social_snapshots")
+}
+
+// SyncJob model - tracks automated sync operations
+model SyncJob {
+  id         String    @id @default(uuid())
+  brandId    String?
+  status     String    // "pending", "running", "completed", "failed"
+  message    String?
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  createdAt  DateTime  @default(now())
+  
+  brand      Brand?    @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  
+  @@index([brandId])
+  @@index([status, startedAt])
+  @@map("sync_jobs")
+}
+
