@@ -87,3 +87,6 @@ export default function InsightsPanel({ insights = mockInsights }: InsightsPanel
   );
 }
 
+
+
+

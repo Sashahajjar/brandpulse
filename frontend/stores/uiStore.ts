@@ -37,3 +37,6 @@ export const useUIStore = create<UIStore>((set) => ({
   togglePause: () => set((state) => ({ isPaused: !state.isPaused })),
 }));
 
+
+
+

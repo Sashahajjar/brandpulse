@@ -16,3 +16,6 @@ export const syncBrandSchema = z.object({
   brandName: z.string().min(1, 'Brand name is required'),
 });
 
+
+
+

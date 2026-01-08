@@ -166,3 +166,6 @@ function generateComparisonSummary(brands: Brand[]) {
   return { sections };
 }
 
+
+
+

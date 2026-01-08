@@ -8,6 +8,7 @@ export interface Brand {
   createdAt: string;
   updatedAt: string;
   platforms?: Platform[];
+  insights?: any[];
 }
 
 export interface Platform {
@@ -60,4 +61,7 @@ export const useBrandStore = create<BrandStore>((set, get) => ({
     }
   },
 }));
+
+
+
 
