@@ -114,7 +114,7 @@ function generateBrandSummary(brand: Brand) {
   if (avgEngagement < 3.5) {
     recommendations.push('enhance content interactivity and engagement tactics');
   }
-  if (tiktok && tiktok.engagementRate > instagram?.engagementRate) {
+  if (tiktok && instagram && tiktok.engagementRate > instagram.engagementRate) {
     recommendations.push('increase TikTok content investment');
   }
   if (instagram && !tiktok) {
