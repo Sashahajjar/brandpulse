@@ -72,11 +72,13 @@ export default function DownloadReport({ reportElementId = 'dashboard-report' }:
         htmlBtn.style.display = 'none';
       });
 
+      // Declare disabledSheets outside try block so it's accessible in catch
+      const disabledSheets: { node: HTMLElement; originalDisplay: string }[] = [];
+      
       try {
         // Temporarily disable all stylesheets that might contain lab() colors
         // We'll apply computed styles as inline styles instead
         const styleSheets = Array.from(document.styleSheets);
-        const disabledSheets: { node: HTMLElement; originalDisplay: string }[] = [];
         
         styleSheets.forEach((sheet) => {
           try {

@@ -79,16 +79,16 @@ export default function AIAnalysis({
       
       if (instagram && tiktok) {
         if (tiktok.engagementRate > instagram.engagementRate) {
-          analysisSections.push(`Platform Strategy: TikTok demonstrates superior engagement performance (${tiktok.engagementRate.toFixed(1)}% vs ${instagram.engagementRate.toFixed(1)}% on Instagram), suggesting strong potential for increased TikTok content investment. Consider reallocating resources to capitalize on this platform's higher engagement potential.`);
+          analysisSections.push(`Platform Strategy: TikTok demonstrates superior engagement performance (${tiktok!.engagementRate.toFixed(1)}% vs ${instagram!.engagementRate.toFixed(1)}% on Instagram), suggesting strong potential for increased TikTok content investment. Consider reallocating resources to capitalize on this platform's higher engagement potential.`);
         } else if (instagram.engagementRate > tiktok.engagementRate) {
-          analysisSections.push(`Platform Strategy: Instagram remains the primary engagement driver with ${(instagram.followers / 1000000).toFixed(1)}M followers and an engagement rate of ${instagram.engagementRate.toFixed(1)}%. This platform continues to be the cornerstone of ${brandName}'s social media presence.`);
+          analysisSections.push(`Platform Strategy: Instagram remains the primary engagement driver with ${(instagram!.followers / 1000000).toFixed(1)}M followers and an engagement rate of ${instagram!.engagementRate.toFixed(1)}%. This platform continues to be the cornerstone of ${brandName}'s social media presence.`);
         } else {
           analysisSections.push(`Platform Strategy: Both Instagram and TikTok show balanced engagement levels, indicating a well-distributed social media strategy. This multi-platform approach maximizes reach and audience diversity.`);
         }
       } else if (instagram) {
-        analysisSections.push(`Platform Strategy: Instagram serves as the primary platform with ${(instagram.followers / 1000000).toFixed(1)}M followers. Consider expanding to additional platforms to diversify audience reach.`);
+        analysisSections.push(`Platform Strategy: Instagram serves as the primary platform with ${(instagram!.followers / 1000000).toFixed(1)}M followers. Consider expanding to additional platforms to diversify audience reach.`);
       } else if (tiktok) {
-        analysisSections.push(`Platform Strategy: TikTok is the primary platform with ${(tiktok.followers / 1000000).toFixed(1)}M followers. Consider expanding to Instagram to reach a broader demographic.`);
+        analysisSections.push(`Platform Strategy: TikTok is the primary platform with ${(tiktok!.followers / 1000000).toFixed(1)}M followers. Consider expanding to Instagram to reach a broader demographic.`);
       }
 
       // Overall assessment
