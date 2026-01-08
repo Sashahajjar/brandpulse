@@ -15,11 +15,12 @@ interface PresentationSlideProps {
 export default function PresentationSlide({ brand, index, isActive, insights = [] }: PresentationSlideProps) {
   if (!isActive) return null;
 
-  const instagramPlatform = brand.platforms?.find(p => p.platformType === 'instagram');
-  const tiktokPlatform = brand.platforms?.find(p => p.platformType === 'tiktok');
-  const totalFollowers = brand.platforms?.reduce((sum, p) => sum + (p.followers || 0), 0) || 0;
-  const avgEngagement = brand.platforms?.length > 0
-    ? brand.platforms.reduce((sum, p) => sum + (p.engagementRate || 0), 0) / brand.platforms.length
+  const platforms = brand.platforms || [];
+  const instagramPlatform = platforms.find(p => p.platformType === 'instagram');
+  const tiktokPlatform = platforms.find(p => p.platformType === 'tiktok');
+  const totalFollowers = platforms.reduce((sum, p) => sum + (p.followers || 0), 0);
+  const avgEngagement = platforms.length > 0
+    ? platforms.reduce((sum, p) => sum + (p.engagementRate || 0), 0) / platforms.length
     : 0;
 
   // Prepare chart data (simplified for presentation)
