@@ -67,7 +67,7 @@ function generateBrandSummary(brand: Brand) {
     const totalM = (totalFollowers / 1000000).toFixed(1);
     sections.push({
       title: 'Growth Overview',
-      content: `${brand.name} maintains a strong social media presence with ${totalM}M total followers across Instagram and TikTok. The brand demonstrates balanced growth across both platforms, with Instagram leading in absolute follower count (${(instagram.followers / 1000000).toFixed(1)}M) while TikTok shows higher engagement potential (${tiktok.engagementRate.toFixed(1)}% vs ${instagram.engagementRate.toFixed(1)}%).`,
+      content: `${brand.name} maintains a strong social media presence with ${totalM}M total followers across Instagram and TikTok. The brand demonstrates balanced growth across both platforms, with Instagram leading in absolute follower count (${(instagram!.followers / 1000000).toFixed(1)}M) while TikTok shows higher engagement potential (${tiktok!.engagementRate.toFixed(1)}% vs ${instagram!.engagementRate.toFixed(1)}%).`,
     });
   } else if (instagram) {
     sections.push({
@@ -99,12 +99,12 @@ function generateBrandSummary(brand: Brand) {
     if (tiktok.engagementRate > instagram.engagementRate) {
       sections.push({
         title: 'Platform Strategy',
-        content: `TikTok demonstrates superior engagement performance (${tiktok.engagementRate.toFixed(1)}% vs ${instagram.engagementRate.toFixed(1)}% on Instagram), suggesting strong potential for increased TikTok content investment. The platform's higher engagement rate indicates a more receptive audience and potential for viral content amplification.`,
+        content: `TikTok demonstrates superior engagement performance (${tiktok!.engagementRate.toFixed(1)}% vs ${instagram!.engagementRate.toFixed(1)}% on Instagram), suggesting strong potential for increased TikTok content investment. The platform's higher engagement rate indicates a more receptive audience and potential for viral content amplification.`,
       });
     } else {
       sections.push({
         title: 'Platform Strategy',
-        content: `Instagram remains the primary engagement driver with ${(instagram.followers / 1000000).toFixed(1)}M followers and an engagement rate of ${instagram.engagementRate.toFixed(1)}%. This platform continues to be the cornerstone of ${brand.name}'s social media presence, offering a mature audience and established content ecosystem.`,
+        content: `Instagram remains the primary engagement driver with ${(instagram!.followers / 1000000).toFixed(1)}M followers and an engagement rate of ${instagram!.engagementRate.toFixed(1)}%. This platform continues to be the cornerstone of ${brand.name}'s social media presence, offering a mature audience and established content ecosystem.`,
       });
     }
   }
